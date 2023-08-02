@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Crefrom django.http import HttpResponse,jsonResponse
 
-def home(request):
+def index (request):
    return render (request,'website/index.html')
 
 def about(request):
