@@ -12,7 +12,7 @@ def blog_view(request):
               
 def blog_single(request,pid):
 
-    posts=get_object_or_404(post,pk=pid)
+    posts=get_object_or_404(post,pk=pid,status=1,published_date__lte=timezone.now())
     if post:
         posts.counted_views = posts.counted_views + 1
         posts.save()
