@@ -1,5 +1,6 @@
 	{% load static %}
-	<!DOCTYPE html>
+    {% load blog_tag %}
+	
 	<html lang="zxx" class="no-js">
 	<head>
 		<!-- Mobile Specific Meta -->
@@ -55,7 +56,7 @@
 				</div>
 				<div class="container main-menu">
 					<div class="row align-items-center justify-content-between d-flex">
-				      <div id="logo">
+			 	      <div id="logo">
 				        <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" title="" /></a>
 				      </div>
 				      <nav id="nav-menu-container">
@@ -107,7 +108,7 @@
 							<div class="single-post row">
 								<div class="col-lg-12">
 									<div class="feature-img">
-										<img class="img-fluid" src="{% static 'img/blog/feature-img1.jpg' %}" alt="">
+										<img class="img-fluid" src="{{posts.image.url}}" alt="">
 									</div>									
 								</div>
 								<div class="col-lg-3  col-md-3 meta-details">
@@ -119,7 +120,7 @@
 									</ul>
 									<div class="user-details row"> 
 										<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{posts.author}}</a> <span class="lnr lnr-user"></span></p>
-										<p class="date col-lg-12 col-md-12 col-6"><a href="#">12 Dec, 2017</a> <span class="lnr lnr-calendar-full"></span></p>
+										<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{posts.published_date|date:"d M Y"}}</a> <span class="lnr lnr-calendar-full"></span></p>
 										<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{posts.counted_views}}ws</a> <span class="lnr lnr-eye"></span></p>
 										<p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p>
 										<ul class="social-links col-lg-12 col-md-12 col-6">
@@ -151,27 +152,42 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt=""></a>
-										</div>
+										{% if previous %}
+											<a href="{% url 'blog:single' pid=previous.id %} ", rel= 'previous'><img class="img-fluid" src="{{previous.image.url}}" alt=""></a>
+										{% else %}
+										There is no previous page
+
+										{% endif %}
+    									</div>
 										<div class="arrow">
 											<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
 										</div>
+										
 										<div class="detials">
 											<p>Prev Post</p>
-											<a href="#"><h4>Space The Final Frontier</h4></a>
+											<a href="{{previous.id}} " , rel='previous'><h4>{{previous.title}}</h4></a>
+										     
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-										<div class="detials">
-											<p>Next Post</p>
-											<a href="#"><h4>Telescopes 101</h4></a>
+									    <div class="detials">
+										    <p>Next Post</p>
+											<a href="{{ nextp.id }}" , rel="nextp"><h4>{{nextp.title}}</h4></a>
 										</div>
 										<div class="arrow">
 											<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
 										</div>
+
 										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt=""></a>
-										</div>										
+										{% if nextp %}
+											<a href="{% url 'blog:single' pid=nextp.id %}" , rel= 'nextp' ><img class="img-fluid" src="{{nextp.image.url}}" alt=""></a>
+										{% else %}
+										    There is no next page
+
+										{% endif %}
+
+										</div>
+																		
 									</div>									
 								</div>
 							</div>
@@ -302,22 +318,8 @@
 			                            <button type="submit"><i class="fa fa-search"></i></button>
 			                        </form>
 								</div>
-								<div class="single-sidebar-widget user-info-widget">
-									<img src="{% static 'img/blog/user-info.png' %}" alt="">
-									<a href="#"><h4>Charlie Barber</h4></a>
-									<p>
-										Senior blog writer
-									</p>
-									<ul class="social-links">
-										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fa fa-github"></i></a></li>
-										<li><a href="#"><i class="fa fa-behance"></i></a></li>
-									</ul>
-									<p>
-										Boot camps have its supporters andit sdetractors. Some people do not understand why you should have to spend money on boot camp when you can get. Boot camps have itssuppor ters andits detractors.
-									</p>
-								</div>
+								{% include 'blog/blog-writer.html' %}
+
 								<div class="single-sidebar-widget popular-post-widget">
 									<h4 class="popular-title">Popular Posts</h4>
 									<div class="popular-post-list">
@@ -464,7 +466,7 @@
 							<div class="single-footer-widget">
 								<h6>About Agency</h6>
 								<p>
-									The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point 
+									The world has become so fast paced that people don’t nt to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point 
 								</p>
 							</div>
 						</div>
