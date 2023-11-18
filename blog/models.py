@@ -10,7 +10,7 @@ class category(models.Model):
 
 class post (models.Model):
     title= models.CharField(max_length=255)
-    author=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    author=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     content= models.TextField()
     image=models.ImageField(upload_to='blog/')
     category=models.ManyToManyField(category)

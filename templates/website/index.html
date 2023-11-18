@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {%load static%}
+{% load website_tags %}
 {% block content %}
 			
 			<!-- start banner Area -->
@@ -174,8 +175,10 @@
 			</section>
 			<!-- End home-about Area -->
 			
+	{% latesposts %}
 	
-			<!-- Start blog Area -->
+
+			<!-- 
 			<section class="recent-blog-area section-gap">
 				<div class="container">
 				<div class="row d-flex justify-content-center">
@@ -190,7 +193,7 @@
 <div class="active-recent-blog-carusel owl-carousel owl-theme owl-loaded">
 
 
-
+ 
 
 <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1170px, 0px, 0px); transition: all 0.5s ease 0s; width: 4680px;"><div class="owl-item cloned" style="width: 360px; margin-right: 30px;"><div class="single-recent-blog-post item">
 <div class="thumb">
@@ -447,7 +450,10 @@ Acres of Diamonds… you’ve read the famous story, or at least had it related 
 </div></div></div></div>
 <div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div class="owl-dots" style=""><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div></div></div></div>
 </div>
-</div>								
+</div>		-->						
 				
-			<!-- End recent-blog Area -->			
+			<!-- End recent-blog Area -->
+
+
+
 {% endblock %}
