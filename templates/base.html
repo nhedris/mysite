@@ -71,9 +71,40 @@
 				</div>
 			</header>
 {% block content %}
+{% endblock  %}
 
 
- {% endblock  %}
+                    {% if messages %} 
+						 <ul class="messages">
+							{% for message in messages %}
+							<h4><li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></h4>
+							{% endfor %}
+						</ul>
+						{% endif %}
+
+                        {% if form.error %}
+						 <div class="alert alert-error">
+						 <h4>plase fix the folloing error </h4>
+						 <ul>
+						 {% for field in form %}
+						   {% if field.errors %}
+						      {% for error in field.errors %}
+						   <li><a href="#id_{{feild.name}}" class="error">{{error|escape}}</a></li>
+                              {% endfor %}
+							{% endif %}
+						 {% endfor %}	 						   
+                         </ul>
+						 {% if form.non_field_errors %}
+						    {{form.non_field_errors}}
+						 {% endif %}
+					 {% endif %}
+
+
+{% block message %}
+
+{% endblock  %}
+
+
 
  <footer class="footer-area section-gap">
 				<div class="container">
@@ -116,11 +147,12 @@
 								<p>
 									For business professionals caught between high OEM price and mediocre print and graphic output.									
 								</p>								
-								<div id="mc_embed_signup">
-									<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscription relative">
-										<div class="input-group d-flex flex-row">
-											<input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
-											<button class="btn bb-btn"><span class="lnr lnr-location"></span></button>		
+								<div >
+									<form target="_blank" action="{% url 'website:newsletter'%}" method="POST" class="subscription relative">
+										 {% csrf_token %}
+										 <div class="input-group d-flex flex-row">
+											<input name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+											<button class="btn bb-btn" type="submit"><span class="lnr lnr-location"></span></button>		
 										</div>									
 										<div class="mt-10 info"></div>
 									</form>

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from website.models import contact
+from website.models import Contact,Newsletter
 
 
-
-class contactAdmin (admin.ModelAdmin):
+ 
+class ContactAdmin (admin.ModelAdmin):
      date_hierarchy = "created_date"
      empty_value_display = "-empty-"
      list_display = ['name','email', 'created_date']  
@@ -13,4 +13,5 @@ class contactAdmin (admin.ModelAdmin):
      class Meta:
          ordering=('created_date' )
         
-admin.site.register(contact,contactAdmin)    
+admin.site.register(Contact,ContactAdmin)    
+admin.site.register(Newsletter)
