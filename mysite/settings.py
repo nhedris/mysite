@@ -50,8 +50,14 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     'captcha',
+    'accounts',
+   
     
+  
 ]
+
+
+
 #sites framework
 SITE_ID = 2
 
@@ -63,6 +69,12 @@ ROBOTS_USE_SITEMAP=False
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'simple-captcha', 
 }
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_SESSION_REMEMBER=None
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,6 +88,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mysite.urls'
+
+
+
+
 
 TEMPLATES = [
     {
@@ -103,6 +119,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        
     }
 }
 
@@ -166,9 +183,7 @@ INTERNAL_IPS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-
+X_FRAME_OPTIONS='SAMEORIGIN'
 #summernote config
 SUMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
@@ -202,3 +217,13 @@ SUMMERNOTE_CONFIG = {
     },
     'lazy': False,
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'nh.edris@gmail.com' #your email-id
+EMAIL_HOST_PASSWORD = 'R2018n2018' #your password
+EMAIL_PORT = 1025
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
