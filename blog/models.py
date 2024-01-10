@@ -29,8 +29,9 @@ class post (models.Model):
      
     def __str__(self):
         return self.title
+    
     def get_abdolute_url(self):
-        return reverse ('blog:single',kwargs={'pid':self.id})
+        return reverse ('blog:single',kwargs={'pid': self.id})
       
 
 class Comment (models.Model):
